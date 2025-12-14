@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Клуб настольных игр</title>
+    <title>Crits n Shits — клуб настольных игр</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -11,7 +11,6 @@
             font-family: Arial, Helvetica, sans-serif;
             background: #1e1e1e;
             color: #f0f0f0;
-            line-height: 1.6;
         }
 
         header {
@@ -22,17 +21,46 @@
 
         header h1 {
             margin: 0;
-            font-size: 2.2em;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: #333;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: #ccc;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        nav button.active {
+            background: #4caf50;
+            color: #000;
+            font-weight: bold;
+        }
+
+        nav button:hover {
+            color: #fff;
         }
 
         main {
-            max-width: 800px;
-            margin: 40px auto;
+            max-width: 900px;
+            margin: 30px auto;
             padding: 0 20px;
         }
 
-        section {
-            margin-bottom: 40px;
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
         }
 
         h2 {
@@ -40,18 +68,31 @@
             padding-bottom: 5px;
         }
 
-        .button {
-            display: inline-block;
-            background: #4caf50;
-            color: #000;
-            padding: 12px 20px;
-            text-decoration: none;
-            font-weight: bold;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery div {
+            background: #333;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
             border-radius: 6px;
         }
 
-        .button:hover {
-            background: #66bb6a;
+        ul {
+            line-height: 1.8;
+        }
+
+        .master {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #2a2a2a;
+            border-radius: 6px;
         }
 
         footer {
@@ -65,56 +106,97 @@
 <body>
 
 <header>
-    <h1>Клуб настольных игр</h1>
-    <p>Играем. Общаемся. Создаём истории 🎲</p>
+    <h1>Crits n Shits</h1>
+    <p>Клуб настольных и ролевых игр 🎲</p>
 </header>
+
+<nav>
+    <button class="active" onclick="openTab('about')">О клубе</button>
+    <button onclick="openTab('gallery')">Галерея</button>
+    <button onclick="openTab('games')">Настолки</button>
+    <button onclick="openTab('masters')">Наши мастера</button>
+    <button onclick="openTab('rules')">Правила</button>
+</nav>
 
 <main>
 
-    <section>
+    <section id="about" class="tab active">
         <h2>О клубе</h2>
         <p>
-            Мы — сообщество любителей настольных и ролевых игр.
-            Проводим регулярные игровые вечера, кампании D&D и FATE,
-            а также тематические ивенты.
+            Crits n Shits — это место для любителей настольных и ролевых игр.
+            Мы играем в D&D, FATE и настольные игры, проводим ваншоты,
+            кампании и тематические ивенты.
         </p>
     </section>
 
-    <section>
-        <h2>Когда и где</h2>
-        <p>
-            📍 Город: _______<br>
-            🕒 Встречи: раз в неделю<br>
-            🎲 Форматы: D&D, настольные игры, one-shot’ы
-        </p>
+    <section id="gallery" class="tab">
+        <h2>Галерея</h2>
+        <div class="gallery">
+            <div>Фото 1</div>
+            <div>Фото 2</div>
+            <div>Фото 3</div>
+            <div>Фото 4</div>
+        </div>
+        <p style="color:#777;">(сюда позже добавим реальные фото)</p>
     </section>
 
-    <section>
-        <h2>Членство</h2>
-        <p>
-            Членский взнос помогает оплачивать помещение,
-            реквизит и развитие клуба.
-        </p>
-
-        <!-- ЗАМЕНИ ССЫЛКУ НА ПЛАТЁЖ -->
-        <a class="button" href="#" target="_blank">
-            Вступить в клуб
-        </a>
+    <section id="games" class="tab">
+        <h2>Список настолок</h2>
+        <ul>
+            <li>Dungeons & Dragons 5e</li>
+            <li>FATE Core</li>
+            <li>Nemesis</li>
+            <li>Arkham Horror</li>
+            <li>Gloomhaven</li>
+            <li>Blood Rage</li>
+        </ul>
     </section>
 
-    <section>
-        <h2>Контакты</h2>
-        <p>
-            Telegram: @yourclub<br>
-            Email: yourclub@email.com
-        </p>
+    <section id="masters" class="tab">
+        <h2>Наши мастера</h2>
+
+        <div class="master">
+            <strong>Александр</strong><br>
+            D&D 5e, мрачное фэнтези, сюжетно-ориентированные кампании
+        </div>
+
+        <div class="master">
+            <strong>Мария</strong><br>
+            FATE, ваншоты, экспериментальные форматы
+        </div>
+    </section>
+
+    <section id="rules" class="tab">
+        <h2>Правила клуба</h2>
+        <ul>
+            <li>Уважение к другим игрокам и мастерам</li>
+            <li>Пунктуальность</li>
+            <li>Никакого токсичного поведения</li>
+            <li>Членский взнос обязателен для регулярных игр</li>
+            <li>Мастер — всегда прав (но его можно убедить 😉)</li>
+        </ul>
     </section>
 
 </main>
 
 <footer>
-    © 2025 Клуб настольных игр
+    © 2025 Crits n Shits
 </footer>
+
+<script>
+    function openTab(tabId) {
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        document.querySelectorAll('nav button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        document.getElementById(tabId).classList.add('active');
+        event.target.classList.add('active');
+    }
+</script>
 
 </body>
 </html>
