@@ -10,7 +10,7 @@
       "max": 180
     },
     "description": "Кооперативна (але не дуже) гра про виживання на космічному кораблі.",
-    "image": "images/boardgames/nemesis.jpg"
+    "image": "images/games/nemesis.jpg"
   },
   {
     "title": "Gloomhaven",
@@ -23,6 +23,6 @@
       "max": 120
     },
     "description": "Тактична кампанійна RPG у форматі настільної гри.",
-    "image": "images/boardgames/gloomhaven.jpg"
+    "image": "images/games/gloomhaven.jpg"
   }
 ]
