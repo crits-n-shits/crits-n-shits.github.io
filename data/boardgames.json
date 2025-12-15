@@ -1,1 +1,18 @@
+[
+  {
+    "title": "Nemesis",
+    "description": "Кооперативний sci-fi survival з прихованими цілями",
+    "image": "images/games/nemesis.jpg"
+  },
+  {
+    "title": "Arkham Horror",
+    "description": "Лавкрафтівський жах і безумство",
+    "image": "images/games/arkham.jpg"
+  },
+  {
+    "title": "Gloomhaven",
+    "description": "Тактичне фентезі з кампанією",
+    "image": "images/games/gloomhaven.jpg"
+  }
+]
 
