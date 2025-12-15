@@ -1,42 +1,6 @@
-async function loadGames(url, containerId, count = -1) {
-    const response = await fetch(url);
-    const data = await response.json();
+// data-loader.js
 
-    let itemsToDisplay = data;
-    
-    // Если указано count и это 'boardgames-list', выбираем случайные игры
-    if (count > 0 && containerId === "boardgames-list") {
-        itemsToDisplay = shuffleArray(data).slice(0, count);
-    }
-    
-    // Для других разделов (rpg-list, wargames-list) загружаем все по умолчанию
-    // Если вы хотите ограничить их тоже, измените вызов в DOMContentLoaded
-    
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
-
-    itemsToDisplay.forEach(item => {
-        const row = document.createElement("div");
-        row.className = "game-row";
-        row.style.backgroundImage = `url('${item.image}')`;
-
-        row.innerHTML = `
-            <div class="game-content">
-                <div class="game-header">
-                    <strong>${item.title}</strong>
-                    <div class="game-meta">
-                        ${formatPlayers(item.players)}
-                        ${formatTime(item.time)}
-                    </div>
-                </div>
-                <p>${item.description}</p>
-            </div>
-        `;
-
-        container.appendChild(row);
-    });
-}
-
+// Вспомогательная функция для перемешивания массива (Фишер-Йетс)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -61,11 +25,63 @@ function formatTime(time) {
     return `⏱ ${time.min}–${time.max} хв`;
 }
 
+// НОВАЯ ФУНКЦИЯ: Генерация тегов
+function formatTags(tags) {
+    if (!tags || tags.length === 0) return '';
+    return `
+        <div class="game-tags">
+            ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        </div>
+    `;
+}
+
+
+async function loadGames(url, containerId, count = -1) {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    let itemsToDisplay = data;
+    
+    // Логика для выбора случайных игр (только для секции "Настолки")
+    if (count > 0 && containerId === "boardgames-list") {
+        itemsToDisplay = shuffleArray(data).slice(0, count);
+    }
+    
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    itemsToDisplay.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "game-row";
+        
+        // НОВЫЙ ШАБЛОН КАРТОЧКИ
+        card.innerHTML = `
+            ${item.image ? `<img src="${item.image}" alt="${item.title}" class="game-image">` : ''}
+            <div class="game-content">
+                <div>
+                    <strong>${item.title}</strong>
+                    <p>${item.description}</p>
+                    ${formatTags(item.tags)}
+                </div>
+                
+                <div class="game-meta-footer">
+                    ${formatPlayers(item.players)}
+                    ${formatTime(item.time)}
+                </div>
+            </div>
+        `;
+        // КОНЕЦ НОВОГО ШАБЛОНА
+
+        container.appendChild(card);
+    });
+}
+
 async function loadMasters() {
     const response = await fetch("data/masters.json");
     const data = await response.json();
 
     const container = document.getElementById("masters-list");
+    container.innerHTML = ""; 
 
     data.forEach(master => {
         const card = document.createElement("div");
@@ -83,19 +99,20 @@ async function loadMasters() {
     });
 }
 
+// ОБНОВЛЕННАЯ ФУНКЦИЯ loadGallery
 async function loadGallery(count = -1) {
     const response = await fetch("data/gallery.json");
     const data = await response.json();
 
     let itemsToDisplay = data;
     
-    // Если указан count, выбираем случайные фото
+    // Логика для выбора случайных фото
     if (count > 0) {
         itemsToDisplay = shuffleArray(data).slice(0, count);
     }
     
     const container = document.getElementById("gallery-list");
-    container.innerHTML = "";
+    container.innerHTML = ""; 
 
     itemsToDisplay.forEach(item => {
         const img = document.createElement("img");
@@ -108,10 +125,15 @@ async function loadGallery(count = -1) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadGames("data/boardgames.json", "boardgames-list", 3);
+    // Загружаем 3 случайные настолки
+    loadGames("data/boardgames.json", "boardgames-list", 3); 
+    
+    // Загружаем полный список НРИ и Варгеймов
     loadGames("data/rpg.json", "rpg-list");
     loadGames("data/wargames.json", "wargames-list");
+    
     loadMasters();
-    loadGallery(5);
+    
+    // Загружаем 3 случайных фото из галереи
+    loadGallery(5); 
 });
-
