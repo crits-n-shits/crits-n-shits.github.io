@@ -1,1 +1,13 @@
+[
+  {
+    "title": "Dungeons & Dragons 5e",
+    "description": "Класична фентезійна НРІ з кампаніями та ваншотами",
+    "image": "images/rpg/dnd5e.jpg"
+  },
+  {
+    "title": "FATE Core",
+    "description": "Наративна система з фокусом на історію та аспекти",
+    "image": "images/rpg/fate.jpg"
+  }
+]
 
