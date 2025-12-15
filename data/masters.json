@@ -1,1 +1,13 @@
+[
+  {
+    "name": "Александр",
+    "systems": ["D&D 5e", "Dark Fantasy"],
+    "image": "images/masters/alex.jpg"
+  },
+  {
+    "name": "Мария",
+    "systems": ["FATE", "Ваншоты", "Экспериментальные форматы"],
+    "image": "images/masters/maria.jpg"
+  }
+]
 
