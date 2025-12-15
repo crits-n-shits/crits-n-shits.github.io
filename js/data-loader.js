@@ -100,7 +100,7 @@ async function loadGallery() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadGames("data/boardgames.json", "boardgames-list");
+    loadGames("data/boardgames.json", "boardgames-list", 3);
     loadGames("data/rpg.json", "rpg-list");
     loadGames("data/wargames.json", "wargames-list");
     loadMasters();
