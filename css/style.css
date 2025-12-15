@@ -82,7 +82,11 @@ body {
    НАВИГАЦИЯ
 ===================== */
 
-nav {
+.sticky-nav {
+    position: sticky; /* Делаем навигацию фиксированной */
+    top: 0;           /* Закрепляем сверху */
+    z-index: 1000;    /* Обеспечиваем, чтобы навигация была поверх всего контента */
+    
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -126,6 +130,8 @@ main {
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 20px;
+    /* Убедимся, что начало контента видно */
+    scroll-margin-top: 60px; /* Добавьте значение, равное или чуть больше высоты nav */
 }
 
 /* УДАЛЯЕМ ВСЕ СТИЛИ .tab, .tab.active И @keyframes fadeIn */
@@ -134,8 +140,11 @@ section {
     border-bottom: 1px solid var(--border-soft); /* Разделитель между секциями */
 }
 
-section:last-child {
-    border-bottom: none;
+section {
+    padding: 40px 0; 
+    border-bottom: 1px solid var(--border-soft);
+    /* Добавляем отступ сверху, чтобы заголовок секции был виден ниже фиксированного меню */
+    scroll-margin-top: 70px; 
 }
 
 /* =====================
