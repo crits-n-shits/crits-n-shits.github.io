@@ -1,18 +1,28 @@
 [
   {
     "title": "Nemesis",
-    "description": "Кооперативний sci-fi survival з прихованими цілями",
-    "image": "images/games/nemesis.jpg"
-  },
-  {
-    "title": "Arkham Horror",
-    "description": "Лавкрафтівський жах і безумство",
-    "image": "images/games/arkham.jpg"
+    "players": {
+      "min": 1,
+      "max": 5
+    },
+    "time": {
+      "min": 90,
+      "max": 180
+    },
+    "description": "Кооперативна (але не дуже) гра про виживання на космічному кораблі.",
+    "image": "images/boardgames/nemesis.jpg"
   },
   {
     "title": "Gloomhaven",
-    "description": "Тактичне фентезі з кампанією",
-    "image": "images/games/gloomhaven.jpg"
+    "players": {
+      "min": 1,
+      "max": 4
+    },
+    "time": {
+      "min": 60,
+      "max": 120
+    },
+    "description": "Тактична кампанійна RPG у форматі настільної гри.",
+    "image": "images/boardgames/gloomhaven.jpg"
   }
 ]
-
