@@ -1,11 +1,21 @@
-async function loadGames(url, containerId) {
+async function loadGames(url, containerId, count = -1) {
     const response = await fetch(url);
     const data = await response.json();
 
+    let itemsToDisplay = data;
+    
+    // Если указано count и это 'boardgames-list', выбираем случайные игры
+    if (count > 0 && containerId === "boardgames-list") {
+        itemsToDisplay = shuffleArray(data).slice(0, count);
+    }
+    
+    // Для других разделов (rpg-list, wargames-list) загружаем все по умолчанию
+    // Если вы хотите ограничить их тоже, измените вызов в DOMContentLoaded
+    
     const container = document.getElementById(containerId);
     container.innerHTML = "";
 
-    data.forEach(item => {
+    itemsToDisplay.forEach(item => {
         const row = document.createElement("div");
         row.className = "game-row";
         row.style.backgroundImage = `url('${item.image}')`;
@@ -25,6 +35,14 @@ async function loadGames(url, containerId) {
 
         container.appendChild(row);
     });
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 function formatPlayers(players) {
