@@ -5,18 +5,21 @@
     <title>Crits n Shits — клуб настольных игр</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header>
     <h1>Crits n Shits</h1>
-    <p>Клуб настольных и ролевых игр 🎲</p>
+    <p>Клуб настольних, рольових і тактичних ігор 🎲</p>
 </header>
 
 <nav>
     <button class="active" onclick="openTab('about', this)">О клубе</button>
-    <button onclick="openTab('games', this)">Настолки</button>
+    <button onclick="openTab('boardgames', this)">Настолки</button>
+    <button onclick="openTab('rpg', this)">НРІ</button>
+    <button onclick="openTab('wargames', this)">Варгеймы</button>
     <button onclick="openTab('masters', this)">Мастера</button>
     <button onclick="openTab('gallery', this)">Галерея</button>
     <button onclick="openTab('rules', this)">Правила</button>
@@ -29,86 +32,60 @@
         <h2>О клубе</h2>
 
         <p>
-            <strong>Crits n Shits</strong> — це простір для любителів настільних ігор,
-            настільно-ролевих ігор (НРІ), варгеймів і скірмішів.
+            <strong>Crits n Shits</strong> — це простір для настільних,
+            настільно-рольових і тактичних ігор.
         </p>
 
         <p>
-            Ми збираємось, щоб грати, спілкуватися та відпочивати від буденності.
-            Клуб не є комерційним — усі внески йдуть виключно на оплату приміщення.
+            Ми граємо у НРІ, настолки, варгейми та скірміші,
+            проводимо ваншоти, кампанії, відкриті ігрові вечори
+            та тематичні івенти.
+        </p>
+
+        <p>
+            Клуб існує як хобійне ком’юніті. Усі внески йдуть виключно
+            на підтримку простору.
         </p>
 
         <h3>Контакти</h3>
-        <ul class="contacts">
-            <li>📍 Місто: (вкажеш пізніше)</li>
-            <li>💬 Telegram: @critsnshits</li>
-            <li>📧 Email: critsnshits@example.com</li>
+        <ul>
+            <li>Telegram: <a href="#" target="_blank">t.me/crits_n_shits</a></li>
+            <li>Discord: <a href="#" target="_blank">discord.gg/xxxxx</a></li>
+            <li>Email: critsnshits@gmail.com</li>
         </ul>
     </section>
 
     <!-- НАСТОЛКИ -->
-    <section id="games" class="tab">
-        <h2>Настільні ігри клубу</h2>
+    <section id="boardgames" class="tab">
+        <h2>Настільні ігри</h2>
+        <div id="boardgames-list" class="games-table"></div>
+    </section>
 
-        <div class="games-table">
+    <!-- НРИ -->
+    <section id="rpg" class="tab">
+        <h2>Настільно-рольові ігри</h2>
+        <div id="rpg-list" class="games-table"></div>
+    </section>
 
-            <div class="game-row" style="background-image:url('images/games/nemesis.jpg')">
-                <div class="game-content">
-                    <strong>Nemesis</strong>
-                    <span>Кооперативний sci-fi survival</span>
-                </div>
-            </div>
-
-            <div class="game-row" style="background-image:url('images/games/arkham.jpg')">
-                <div class="game-content">
-                    <strong>Arkham Horror</strong>
-                    <span>Лавкрафтівський жах</span>
-                </div>
-            </div>
-
-            <div class="game-row" style="background-image:url('images/games/gloomhaven.jpg')">
-                <div class="game-content">
-                    <strong>Gloomhaven</strong>
-                    <span>Тактичне фентезі</span>
-                </div>
-            </div>
-
-        </div>
+    <!-- ВАРГЕЙМЫ -->
+    <section id="wargames" class="tab">
+        <h2>Варгейми та скірміші</h2>
+        <div id="wargames-list" class="games-table"></div>
     </section>
 
     <!-- МАСТЕРА -->
     <section id="masters" class="tab">
-        <h2>Майстри</h2>
-
-        <div class="masters-list">
-
-            <div class="master-card">
-                <img src="images/masters/alex.jpg" alt="Александр">
-                <div>
-                    <strong>Александр</strong>
-                    <p>D&D 5e, мрачное фэнтези, кампании</p>
-                </div>
-            </div>
-
-            <div class="master-card">
-                <img src="images/masters/maria.jpg" alt="Мария">
-                <div>
-                    <strong>Мария</strong>
-                    <p>FATE, ваншоты, экспериментальные форматы</p>
-                </div>
-            </div>
-
-        </div>
+        <h2>Наші майстри</h2>
+        <div id="masters-list" class="masters-list"></div>
     </section>
 
     <!-- ГАЛЕРЕЯ -->
     <section id="gallery" class="tab">
         <h2>Галерея</h2>
-
         <div class="gallery">
-            <img src="images/gellery/img1.jpg" alt="">
-            <img src="images/gellery/img2.jpg" alt="">
-            <img src="images/gellery/img3.jpg" alt="">
+            <img src="images/gallery/img1.jpg" alt="Игровой вечер">
+            <img src="images/gallery/img2.jpg" alt="Игровой вечер">
+            <img src="images/gallery/img3.jpg" alt="Игровой вечер">
         </div>
     </section>
 
@@ -116,35 +93,47 @@
     <section id="rules" class="tab">
         <h2>Правила клубу</h2>
 
-        <ol class="rules">
-            <li><strong>Загальні положення</strong><br>
-                Клуб — це простір для хобі, ігор та відпочинку.
-            </li>
+        <h3>1. Загальні положення</h3>
+        <p>
+            Клуб — це простір для хобі: настільних ігор,
+            настільно-ролевих ігор (НРІ), варгеймів, скірмішів тощо.
+        </p>
+        <p>
+            Ми не комерційна організація. Усі внески йдуть
+            виключно на оплату приміщення.
+        </p>
 
-            <li><strong>Поведінка та взаємоповага</strong><br>
-                Будь ввічливим. Майстер — такий самий учасник гри.
-            </li>
+        <h3>2. Поведінка та взаємоповага</h3>
+        <p>
+            Будь ввічливим і поважай інших. Майстер гри —
+            такий самий учасник процесу, а не обслуговуючий персонал.
+        </p>
 
-            <li><strong>Оплата</strong><br>
-                Внески сплачуються вчасно.
-            </li>
+        <h3>3. Оплата</h3>
+        <p>
+            Членські внески та оплата ігор — вчасно.
+        </p>
 
-            <li><strong>Матеріальні речі</strong><br>
-                Не псуй майно клубу чи учасників.
-            </li>
+        <h3>4. Матеріальні речі</h3>
+        <p>
+            Не кради і не псуй майно клубу чи учасників.
+        </p>
 
-            <li><strong>Алкоголь та куріння</strong><br>
-                Міцний алкоголь заборонено. Куріння — лише на вулиці.
-            </li>
+        <h3>5. Алкоголь і куріння</h3>
+        <p>
+            Міцний алкоголь — заборонений.
+            Куріння — тільки на вулиці.
+        </p>
 
-            <li><strong>Політика та мова</strong><br>
-                Клуб поза політикою. Агресія росії — неприйнятна.
-            </li>
+        <h3>6. Політика та культура</h3>
+        <p>
+            Клуб поза політикою. Жодного виправдання агресії росії.
+        </p>
 
-            <li><strong>Участь у подіях</strong><br>
-                Записався — приходь або попередь завчасно.
-            </li>
-        </ol>
+        <h3>7. Участь у подіях</h3>
+        <p>
+            Якщо записався на гру — приходь або попередь заздалегідь.
+        </p>
     </section>
 
 </main>
@@ -153,15 +142,23 @@
     © 2025 Crits n Shits
 </footer>
 
+<!-- JS -->
 <script>
-function openTab(id, btn) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    function openTab(tabId, button) {
+        document.querySelectorAll('.tab').forEach(tab =>
+            tab.classList.remove('active')
+        );
 
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
-}
+        document.querySelectorAll('nav button').forEach(btn =>
+            btn.classList.remove('active')
+        );
+
+        document.getElementById(tabId).classList.add('active');
+        button.classList.add('active');
+    }
 </script>
+
+<script src="js/data-loader.js"></script>
 
 </body>
 </html>
