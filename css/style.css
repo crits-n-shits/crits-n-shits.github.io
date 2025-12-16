@@ -589,3 +589,50 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+* Стили для раздела правил */
+.rule-item {
+    margin-bottom: 30px;
+    padding: 15px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-gold);
+}
+
+.rule-item h3 {
+    margin-top: 0;
+    color: var(--accent-gold);
+}
+
+.rule-item ul {
+    padding-left: 20px;
+}
+
+.rule-item li {
+    margin-bottom: 8px;
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Стили для секції "Про нас" */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.about-content p {
+    margin-bottom: 18px;
+    line-height: 1.7;
+}
+
+.about-list {
+    padding-left: 25px;
+    margin: 15px 0;
+}
+
+.about-list li {
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
