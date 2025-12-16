@@ -6,21 +6,21 @@
     "image": "images/masters/alex.jpg"
   },
   {
-    "name": "Марія",
-    "systems": ["D&D 5e", "Dark Fantasy"],
-    "description": "Досвідчений майстер з 5-річним стажем. Веде епічні кампанії та напружені ваншоти.",
-    "image": "images/masters/maria.jpg"
+    "name": "Ярослава",
+    "systems": ["D&D 5e"],
+    "description": "Майстер D&D, що проводить сюжетно-орієнтовані кампанії з акцентом на персонажів, їхні рішення та наслідки вибору. У грі використовує морально неоднозначні ситуації та світ, який змінюється залежно від дій гравців.",
+    "image": "images/masters/jaroslava.jpg"
   },
   {
-    "name": "Дмитро",
-    "systems": ["Warhammer Fantasy", "Call of Cthulhu"],
+    "name": "Антон",
+    "systems": ["Апокаліпсис", "PbtA", "Кобольди", "Кіберпанк"],
     "description": "Фанат темного фентезі та хоррору. Створює атмосферні сесії з глибоким лором.",
-    "image": "images/masters/dmitro.jpg"
+    "image": "images/masters/anton.jpg"
   },
   {
-    "name": "Олена",
-    "systems": ["Pathfinder 2e", "Starfinder"],
+    "name": "Василь",
+    "systems": ["Світ темряви (Вампіри, демони, тощо)", "Дельта Грін", "Драгонбейн", "Інші специфічні системи"],
     "description": "Любить складні бойові системи та детальне планування пригод.",
-    "image": "images/masters/olena.jpg"
+    "image": "images/masters/vasil.jpg"
   }
 ]
