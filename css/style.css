@@ -205,17 +205,18 @@ nav a.active {
     nav a:first-child {
         border-top: none;
     }
-
+    
+    
     .header-text h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .header-text p {
-        font-size: 0.95rem;
+        font-size: 0.6rem;
     }
 
     .club-logo {
-        width: 100px;
+        width: 70px;
     }
 
     h2 {
