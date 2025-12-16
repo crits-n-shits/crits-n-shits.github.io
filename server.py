@@ -11,6 +11,9 @@ class NoCacheHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Expires', '0')
         super().end_headers()
 
-with socketserver.TCPServer((HOST, PORT), NoCacheHTTPRequestHandler) as httpd:
+class ReuseAddrTCPServer(socketserver.TCPServer):
+    allow_reuse_address = True
+
+with ReuseAddrTCPServer((HOST, PORT), NoCacheHTTPRequestHandler) as httpd:
     print(f"Serving at http://{HOST}:{PORT}")
     httpd.serve_forever()
