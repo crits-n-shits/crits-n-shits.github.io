@@ -74,6 +74,10 @@
             Настільно-рольові ігри
         </h2>
         <div id="rpg-list" class="games-table"></div>
+        
+        <div class="section-footer">
+            <a href="rpg-full.html" class="button-more">Більше НРІ...</a>
+        </div>
     </section>
 
     <section id="wargames">
@@ -82,11 +86,21 @@
             Варгейми та скірміші
         </h2>
         <div id="wargames-list" class="games-table"></div>
+        
+        <div class="section-footer">
+            <a href="wargames-full.html" class="button-more">Більше варгеймів...</a>
+        </div>
     </section>
 
     <section id="masters">
         <h2>Наші майстри</h2>
-        <div id="masters-list" class="masters-list"></div>
+        <div class="masters-carousel">
+            <div id="masters-list" class="masters-list"></div>
+            <div class="masters-arrows">
+                <button id="masters-prev" onclick="mastersPrev()" aria-label="Попередні">&#8592;</button>
+                <button id="masters-next" onclick="mastersNext()" aria-label="Наступні">&#8594;</button>
+            </div>
+        </div>
     </section>
 
     <section id="gallery">

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>НРІ — Crits n Shits</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <img src="images/logo.png" alt="Crits n Shits logo" class="club-logo">
+        <div class="header-text">
+            <h1>Crits n Shits</h1>
+            <p>Клуб настільних, рольових і тактичних ігор</p>
+        </div>
+    </div>
+</header>
+
+<nav class="sticky-nav">
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+    <div class="nav-links">
+        <a href="index.html">На головну</a>
+    </div>
+</nav>
+
+<main>
+    <section>
+        <h2>
+            <span class="section-icon">⚔️</span>
+            Усі настільно-рольові ігри
+        </h2>
+        <div id="rpg-list" class="games-table"></div>
+    </section>
+</main>
+
+<footer>
+    © 2025 Crits n Shits
+</footer>
+
+<script src="js/data-loader.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        loadGames("data/rpg.json", "rpg-list", -1);
+    });
+</script>
+
+</body>
+</html>

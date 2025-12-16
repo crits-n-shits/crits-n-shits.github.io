@@ -1,6 +1,5 @@
 // data-loader.js
 
-// Вспомогательная функция для перемешивания массива (Фишер-Йетс)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -25,7 +24,6 @@ function formatTime(time) {
     return `⏱ ${time.min}–${time.max} хв`;
 }
 
-// НОВАЯ ФУНКЦИЯ: Генерация тегов
 function formatTags(tags) {
     if (!tags || tags.length === 0) return '';
     return `
@@ -35,26 +33,24 @@ function formatTags(tags) {
     `;
 }
 
-
 async function loadGames(url, containerId, count = -1) {
     const response = await fetch(url);
     const data = await response.json();
 
     let itemsToDisplay = data;
     
-    // Логика для выбора случайных игр (только для секции "Настолки")
-    if (count > 0 && containerId === "boardgames-list") {
-        itemsToDisplay = shuffleArray(data).slice(0, count);
+    if (count > 0) {
+        itemsToDisplay = shuffleArray([...data]).slice(0, count);
     }
     
     const container = document.getElementById(containerId);
+    if (!container) return;
     container.innerHTML = "";
 
     itemsToDisplay.forEach(item => {
         const card = document.createElement("div");
         card.className = "game-row";
         
-        // НОВЫЙ ШАБЛОН КАРТОЧКИ
         card.innerHTML = `
             ${item.image ? `<img src="${item.image}" alt="${item.title}" class="game-image">` : ''}
             <div class="game-content">
@@ -70,28 +66,42 @@ async function loadGames(url, containerId, count = -1) {
                 </div>
             </div>
         `;
-        // КОНЕЦ НОВОГО ШАБЛОНА
 
         container.appendChild(card);
     });
 }
 
+let mastersData = [];
+let currentMasterIndex = 0;
+const MASTERS_VISIBLE = 3;
+
 async function loadMasters() {
     const response = await fetch("data/masters.json");
-    const data = await response.json();
+    mastersData = await response.json();
 
+    renderMasters();
+    updateMasterArrows();
+}
+
+function renderMasters() {
     const container = document.getElementById("masters-list");
-    container.innerHTML = ""; 
+    if (!container) return;
+    container.innerHTML = "";
 
-    data.forEach(master => {
+    const visibleMasters = mastersData.slice(currentMasterIndex, currentMasterIndex + MASTERS_VISIBLE);
+
+    visibleMasters.forEach(master => {
         const card = document.createElement("div");
         card.className = "master-card";
 
         card.innerHTML = `
-            <img src="${master.image}" alt="${master.name}">
-            <div>
-                <strong>${master.name}</strong>
-                <p>${master.systems.join(", ")}</p>
+            <div class="master-portrait">
+                <img src="${master.image}" alt="${master.name}">
+            </div>
+            <div class="master-info">
+                <strong class="master-name">${master.name}</strong>
+                <p class="master-systems">${master.systems.join(", ")}</p>
+                <p class="master-description">${master.description || ''}</p>
             </div>
         `;
 
@@ -99,41 +109,64 @@ async function loadMasters() {
     });
 }
 
-// ОБНОВЛЕННАЯ ФУНКЦИЯ loadGallery
+function updateMasterArrows() {
+    const prevBtn = document.getElementById("masters-prev");
+    const nextBtn = document.getElementById("masters-next");
+    const arrowsContainer = document.querySelector(".masters-arrows");
+    
+    if (!arrowsContainer) return;
+
+    if (mastersData.length <= MASTERS_VISIBLE) {
+        arrowsContainer.style.display = "none";
+    } else {
+        arrowsContainer.style.display = "flex";
+        if (prevBtn) prevBtn.disabled = currentMasterIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentMasterIndex >= mastersData.length - MASTERS_VISIBLE;
+    }
+}
+
+function mastersPrev() {
+    if (currentMasterIndex > 0) {
+        currentMasterIndex--;
+        renderMasters();
+        updateMasterArrows();
+    }
+}
+
+function mastersNext() {
+    if (currentMasterIndex < mastersData.length - MASTERS_VISIBLE) {
+        currentMasterIndex++;
+        renderMasters();
+        updateMasterArrows();
+    }
+}
+
 async function loadGallery(count = -1) {
     const response = await fetch("data/gallery.json");
     const data = await response.json();
 
     let itemsToDisplay = data;
     
-    // Логика для выбора случайных фото
     if (count > 0) {
-        itemsToDisplay = shuffleArray(data).slice(0, count);
+        itemsToDisplay = shuffleArray([...data]).slice(0, count);
     }
     
     const container = document.getElementById("gallery-list");
-    container.innerHTML = ""; 
+    if (!container) return;
+    container.innerHTML = "";
 
     itemsToDisplay.forEach(item => {
         const img = document.createElement("img");
         img.src = item.image;
-        img.alt = item.alt || "Фото клуба";
-
+        img.alt = item.alt || "Фото клубу";
         container.appendChild(img);
     });
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
-    // Загружаем 3 случайные настолки
-    loadGames("data/boardgames.json", "boardgames-list", 3); 
-    
-    // Загружаем полный список НРИ и Варгеймов
-    loadGames("data/rpg.json", "rpg-list");
-    loadGames("data/wargames.json", "wargames-list");
-    
+    loadGames("data/boardgames.json", "boardgames-list", 3);
+    loadGames("data/rpg.json", "rpg-list", 3);
+    loadGames("data/wargames.json", "wargames-list", 3);
     loadMasters();
-    
-    // Загружаем 3 случайных фото из галереи
-    loadGallery(5); 
+    loadGallery(5);
 });
