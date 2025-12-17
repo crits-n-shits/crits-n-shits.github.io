@@ -236,6 +236,23 @@
             <li>Email: critsnshits@gmail.com</li>
         </ul>
     </section>
+
+    <section id="events-schedule">
+        <h2><span class="section-icon">📅</span> Розклад ігор</h2>
+        <div id="calendar-container"></div>
+    </section>
+
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-title"></h3>
+            <p id="modal-time" style="color: var(--accent-gold); font-weight: 600;"></p>
+            <div id="modal-description"></div>
+            <div class="modal-footer">
+                <a href="#" id="modal-link" target="_blank" class="tag">Додати в мій календар</a>
+            </div>
+        </div>
+    </div>
     
 
 </main>
@@ -248,5 +265,74 @@
 <script src="js/scroll-spy.js"></script>
 <script src="js/mobile-nav.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.8/index.global.min.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar-container');
+        const modal = document.getElementById('event-modal');
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'uk', // Українська мова
+            googleCalendarApiKey: 'AIzaSyD7DRPvqMrBzWWMccgMaeZ3vWbkGIrWqIE',
+            events: {
+                googleCalendarId: '54e6fa3d1b38f93f27207fea8371682c582478269171ab2639223f0395a8acb3@group.calendar.google.com'
+            },
+
+            // Налаштування вигляду кнопок
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,listWeek'
+            },
+
+            // Обробка натискання на подію (Відкриття модалки)
+            eventClick: function(info) {
+                info.jsEvent.preventDefault();
+
+                // Налаштування для гарного форматування дати та часу без секунд
+                const timeOptions = { 
+                    weekday: 'long', 
+                    day: 'numeric', 
+                    month: 'long', 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                };
+
+                const startStr = info.event.start.toLocaleString('uk-UA', timeOptions);
+                let durationStr = startStr;
+
+                // Якщо є час закінчення, додаємо його
+                if (info.event.end) {
+                    const endOptions = { hour: '2-digit', minute: '2-digit' };
+                    const endStr = info.event.end.toLocaleString('uk-UA', endOptions);
+                    durationStr += ` — ${endStr}`;
+                }
+
+                // Заповнюємо дані в модалці
+                document.getElementById('modal-title').innerText = info.event.title;
+                document.getElementById('modal-time').innerText = durationStr;
+
+                // Обробка опису (якщо він порожній)
+                const description = info.event.extendedProps.description || "Опис події з'явиться незабаром...";
+                document.getElementById('modal-description').innerHTML = description;
+
+                document.getElementById('modal-link').href = info.event.url;
+
+                document.getElementById('event-modal').style.display = "block";
+            }
+        });
+
+        calendar.render();
+
+        // Закриття модалки
+        document.querySelector('.close-modal').onclick = () => modal.style.display = "none";
+        window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; };
+    });
+    </script>
+    
+    
 </body>
 </html>

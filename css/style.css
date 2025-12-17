@@ -636,3 +636,60 @@ a:hover {
     color: var(--text-main);
 }
 
+/* Стилі для календаря */
+#calendar-container {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid var(--border-soft);
+    color: var(--text-main);
+}
+
+/* Кастомізація внутрішніх елементів FullCalendar */
+.fc { font-family: 'Inter', sans-serif; }
+.fc-toolbar-title { font-family: 'Cinzel', serif; color: var(--accent-gold); }
+.fc-button-primary { 
+    background-color: var(--bg-secondary) !important; 
+    border-color: var(--accent-gold) !important; 
+    color: var(--accent-gold) !important;
+}
+.fc-daygrid-day-number { color: var(--text-main); text-decoration: none; }
+.fc-event { 
+    background-color: var(--accent-gold) !important; 
+    border: none !important; 
+    color: #000 !important; 
+    cursor: pointer;
+    padding: 2px 5px;
+}
+.fc-day-today { background: rgba(214, 168, 79, 0.1) !important; }
+
+/* Стилі модального вікна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--bg-main);
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid var(--accent-gold);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 16px;
+    position: relative;
+    color: var(--text-main);
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px; top: 15px;
+    font-size: 28px; color: var(--text-muted); cursor: pointer;
+}
+
+#modal-title { font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 1.8rem; }
+#modal-description { margin-top: 15px; line-height: 1.6; }

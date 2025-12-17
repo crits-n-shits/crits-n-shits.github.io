@@ -137,8 +137,30 @@
             border: 1px solid var(--border-soft);
         }
 
+        /* Кнопка повернення для мобілок (плаваюча) */
+        .mobile-back-btn {
+            display: none; /* Схована на десктопі */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            font-size: 0.9rem;
+        }
+
         /* Мобільні адаптації */
         @media (max-width: 768px) {
+
+            .mobile-back-btn {
+                display: block; /* Показуємо тільки на мобілках */
+            }
+            
             .controls-bar {
                 flex-direction: column;
                 gap: 10px;
@@ -153,7 +175,7 @@
     </style>
 </head>
 <body>
-
+    <a href="index.html" class="mobile-back-btn">← На головну</a>
 <header class="site-header">
     <div class="header-inner">
         <img src="images/logo.png" alt="Crits n Shits logo" class="club-logo">
