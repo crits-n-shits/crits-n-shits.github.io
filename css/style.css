@@ -748,16 +748,25 @@ a:hover {
     }
 
     .fc-toolbar-chunk.fc-center {
-        order: -1; /* Перемещаем текущую дату наверх */
+        order: 1; /* Перемещаем заголовок на вторую строку */
         width: 100%; /* Растягиваем на всю ширину */
         text-align: center; /* Выравниваем по центру */
-        margin-bottom: 8px; /* Добавляем отступ */
+        margin-top: 6px; /* Добавляем отступ сверху */
+    }
+
+    .fc-toolbar-title {
+        font-size: 0.85rem; /* Уменьшаем размер заголовка */
     }
 
     .fc-toolbar-chunk:first-child,
     .fc-toolbar-chunk:last-child {
-        width: 100%; /* Каждая группа кнопок занимает всю ширину */
-        justify-content: space-between; /* Распределяем кнопки */
+        flex: 0 0 auto; /* Фиксируем ширину кнопок */
+        gap: 4px; /* Уменьшаем расстояние между элементами */
+    }
+
+    .fc .fc-button {
+        padding: 4px 6px; /* Компактные кнопки */
+        font-size: 0.75rem; /* Уменьшаем шрифт кнопок */
     }
 }
 
