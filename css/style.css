@@ -870,3 +870,17 @@ a:hover {
         font-size: 0.95rem;
     }
 }
+
+/* Utility для скрытого текста (доступность, можно использовать для вспомогательных меток) */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
