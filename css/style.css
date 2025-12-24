@@ -667,6 +667,80 @@ a:hover {
 }
 .fc-day-today { background: rgba(214, 168, 79, 0.1) !important; }
 
+/* -----------------------
+   Responsive toolbar fix
+   - Не даёт заголовку и кнопкам переноситься на несколько строк.
+   - Уменьшает паддинги и шрифт на мобильных.
+   ----------------------- */
+.fc .fc-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: nowrap; /* запрещаем перенос */
+}
+
+/* Каждый "чанк" (left/center/right) — флекс контейнер */
+.fc .fc-toolbar-chunk {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+
+/* Центр (заголовок) может сжиматься, но не переноситься */
+.fc .fc-toolbar-chunk.fc-center {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0; /* важно для text-overflow */
+}
+
+/* Заголовок — сократить размер и показывать многоточие при нехватке места */
+.fc-toolbar-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.05rem;
+    margin: 0 8px;
+    line-height: 1;
+    min-width: 0;
+}
+
+/* Кнопки — компактнее, чтобы поместиться в строку */
+.fc .fc-button, .fc .fc-toolbar .fc-button {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* Группы кнопок не должны переноситься */
+.fc .fc-button-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+/* Мобильные корректировки */
+@media (max-width: 600px) {
+    #calendar-container {
+        padding: 12px;
+        min-height: 260px; /* kompaktniy vid */
+    }
+
+    .fc-toolbar-title { font-size: 0.95rem; }
+    .fc .fc-toolbar-chunk { gap: 4px; }
+    .fc .fc-button { padding: 5px 6px; font-size: 0.8rem; }
+    /* гарантируем, что левый/правый чанки не растягиваются */
+    .fc .fc-toolbar-chunk:first-child,
+    .fc .fc-toolbar-chunk:last-child {
+        flex: 0 0 auto;
+    }
+    .fc .fc-toolbar-chunk.fc-center {
+        flex: 1 1 auto;
+    }
+}
+
 /* Стилі модального вікна */
 .modal {
     display: none;
