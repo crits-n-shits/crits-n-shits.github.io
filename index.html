@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
+
     <!-- Добавлено для SEO -->
     <meta name="description" content="Crits n Shits — некомерційний клуб настільних, рольових та тактичних ігор у Кам'янському. Розклад івентів, майстри, галерея та правила." />
     <meta name="robots" content="index, follow" />
@@ -28,6 +29,11 @@
     <meta name="twitter:title" content="Crits n Shits — Клуб настільних ігор" />
     <meta name="twitter:description" content="Розклад івентів, майстри, настільні та рольові ігри." />
     <meta name="twitter:image" content="https://crits-n-shits.github.io/images/og-image.jpg" />
+
+    <!-- meta-плейсхолдер для Google Calendar API key.
+         Замените __GOOGLE_CALENDAR_API_KEY__ на реальный ключ при деплое
+         или настройте CI (например, GitHub Actions) чтобы генерировать/подменять этот тег. -->
+    <meta name="google-calendar-api-key" content="__GOOGLE_CALENDAR_API_KEY__" />
 </head>
 <body>
 
@@ -284,6 +290,9 @@
 <script src="js/scroll-spy.js"></script>
 <script src="js/mobile-nav.js"></script>
 
+<!-- Скрипт, который прочитает ключ из meta (или /env.json) и запишет в window.__GOOGLE_CALENDAR_API_KEY__ -->
+<script src="js/env-loader.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.8/index.global.min.js"></script>
 
@@ -292,13 +301,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar-container');
     const modal = document.getElementById('event-modal');
 
+    // Получаем ключ, установленный env-loader.js
+    const GCAL_KEY = window.__GOOGLE_CALENDAR_API_KEY__ || null;
+    if (!GCAL_KEY) {
+        console.warn('Google Calendar API key is not set. Подставьте ключ в meta[name="google-calendar-api-key"] или сгенерируйте /env.json при деплое.');
+    }
+
     // Инициализация календаря
     const calendar = new FullCalendar.Calendar(calendarEl, {
         // По умолчанию будет меняться динамически ниже
         initialView: 'dayGridMonth',
         locale: 'uk', // Украинская локаль (настройки управления)
         height: 'auto',
-        googleCalendarApiKey: __GOOGLE_CALENDAR_API_KEY__,
+        googleCalendarApiKey: GCAL_KEY,
         events: {
             googleCalendarId: '54e6fa3d1b38f93f27207fea8371682c582478269171ab2639223f0395a8acb3@group.calendar.google.com'
         },
