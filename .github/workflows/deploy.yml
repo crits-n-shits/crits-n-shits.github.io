@@ -5,14 +5,13 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v3
 
-    - name: Replace API Key
+    - name: Build and Replace
       run: |
-        # Заменяем заглушку на секрет прямо в корневом файле
-        sed -i 's|__GOOGLE_CALENDAR_API_KEY__|'"${{ secrets.GOOGLE_CALENDAR_API_KEY }}"'|g' ./index.html
+        # Эта команда найдет index.html и в корне, и в папке public (если она есть)
+        find . -name "index.html" -exec sed -i 's|__GOOGLE_CALENDAR_API_KEY__|'"${{ secrets.GOOGLE_CALENDAR_API_KEY }}"'|g' {} +
 
-    - name: Deploy to GitHub Pages
+    - name: Deploy
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        # Указываем текущую директорию (корень) для публикации
-        publish_dir: ./
+        publish_dir: ./ # Или укажите ./public, если вы используете генератор сайта
